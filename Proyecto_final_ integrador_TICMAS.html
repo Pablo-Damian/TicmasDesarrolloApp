@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto final integrador TICMAS (App Simulation)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    #phone {
+      width: 300px;
+      height: 600px;
+      background-color: #f9f9f9;
+      border: 6px solid #000;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    #input1,
+    #input2 {
+      width: 80%;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #compareButton {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #compareButton:hover {
+      background-color: #0056b3;
+    }
+
+    #resultText {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    #bottomButtons {
+      position: absolute;
+      bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .bottomButton {
+      width: 30px;
+      height: 30px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 10px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <div id="phone">
+        <input type="text" id="input1" placeholder="Texto 1">
+        <input type="text" id="input2" placeholder="Texto 2">
+        <button id="compareButton">Comparar</button>
+        <p id="resultText"></p>
+        <p id="unitTestResult"></p>
+        <p id="uiTestResult"></p>
+        <div id="bottomButtons">
+            <div class="bottomButton"><</div>
+            <div class="bottomButton">O</div>
+            <div class="bottomButton">|||</div>
+        </div>
+    </div>
+
+    <!-- Enlace directo a la simulación en Kotlin Playground -->
+    <a href="https://pl.kotl.in/ChMcLrS6W" target="_blank">Link directo de la 'simulación' en Kotlin Playground</a>
+      </div>
+
+    <!-- Iframe para la simulación en Kotlin Playground -->
+    <iframe src="https://pl.kotl.in/w0Xwh5_wX?theme=darcula&readOnly=true" style="width: 50%; height: 90%;"></iframe>
+
+    <script>
+      class ViewModel {
+        constructor() {
+          this.input1 = '';
+          this.input2 = '';
+          this.result = '';
+        }
+
+        compare() {
+          if (this.input1 === this.input2) {
+            this.result = 'Los textos son iguales';
+          } else {
+            this.result = 'Los textos son diferentes';
+          }
+        }
+      }
+
+      const viewModel = new ViewModel();
+
+      document.getElementById('compareButton').addEventListener('click', () => {
+        viewModel.input1 = document.getElementById('input1').value;
+        viewModel.input2 = document.getElementById('input2').value;
+        viewModel.compare();
+        document.getElementById('resultText').innerText = viewModel.result;
+
+        // Simulación de prueba unitaria
+        const unitTestResult = document.getElementById('unitTestResult');
+        unitTestResult.innerText = "Prueba Unitaria: " + viewModel.result;
+
+        // Simulación de prueba de UI
+        const uiTestResult = document.getElementById('uiTestResult');
+        uiTestResult.innerText = "Prueba de UI: " + viewModel.result;
+      });
+    </script>
+</body>
+
+</html>
